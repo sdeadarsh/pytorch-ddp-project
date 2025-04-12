@@ -171,7 +171,7 @@ This project is open-sourced under the [MIT License](https://opensource.org/lice
 
 ##  Author
 
-Built with 💻 and ☕ by **[Adarsh Srivastav](https://github.com/sdeadarsh)**
+Built by **[Adarsh Srivastav](https://github.com/sdeadarsh)**
 
 ---
 
