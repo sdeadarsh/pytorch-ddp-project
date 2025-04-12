@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  master:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: pytorch-master # Important: Used as MASTER_ADDR
+    hostname: pytorch-master
+    environment:
+      - GLOO_SOCKET_IFNAME=eth0 
+      # - HDFS_USER=your_user # Optional
+    volumes:
+      # Mount current dir containing script into /app
+      - .:/app
+    networks:
+      comm_net: # Alias for the communication network
+        aliases:
+          - master # Optional alias, container name is primary
+      # hdfs_net: # Alias for the HDFS network
+
+networks:
+  comm_net: # Internal Compose name for the communication network
+    external: true
+    name: ituring_nw # Actual name created with 'docker network create'
+  # hdfs_net: # Internal Compose name for the HDFS network
+  #   external: true
+  #   name: ituring_nw # Actual name of the network where HDFS is reachable

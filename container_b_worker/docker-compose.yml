@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  worker1:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: pytorch-worker1
+    ports:
+      - "5003:5003"
+    hostname: pytorch-worker1
+    environment:
+      - GLOO_SOCKET_IFNAME=eth0 
+    volumes:
+      # Mount current dir containing script into /app
+      - .:/app
+    networks:
+      comm_net: # Connect ONLY to the communication network
+
+networks:
+  comm_net: # Internal Compose name for the communication network
+    external: true
+    name: ituring_nw # Actual name created with 'docker network create'
