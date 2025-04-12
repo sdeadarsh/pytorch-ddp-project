@@ -30,17 +30,17 @@ This project trains a **Bigram Language Model** from scratch using text input (`
 ```
 pytorch-ddp-project/
 │
-├── container_a_master/         # Master node container
+├── master/         # Master node container
 │   ├── distributed_train.py    # DDP Training script (same in all)
 │   ├── docker-compose.yml      # Compose file for master container
 │   └── Dockerfile              # Dockerfile for master
 │
-├── container_b_worker/         # Worker container on same Docker engine
+├── workerA/         # Worker container on same Docker engine
 │   ├── distributed_train.py
 │   ├── docker-compose.yml
 │   └── Dockerfile
 │
-├── container_c_worker/         # Worker container on another engine
+├── workerB/         # Worker container on another engine
 │   ├── distributed_train.py
 │   ├── docker-compose.yml
 │   └── Dockerfile
@@ -79,12 +79,12 @@ docker network create --driver overlay --attachable pytorch-dist-overlay-net
 #### Start Master + Local Worker:
 
 ```bash
-cd container_a_master
+cd master
 docker-compose up --build -d
 ```
 
 ```bash
-cd ../container_b_worker
+cd ../workerA
 docker-compose up --build -d
 ```
 
@@ -95,7 +95,7 @@ docker-compose up --build -d
 > Ensure it’s connected to the same Docker Swarm or overlay network.
 
 ```bash
-cd container_c_worker
+cd workerB
 docker-compose up --build -d
 ```
 
